@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# NFL Fantasy Draft Tracker
 
-## Getting Started
+Live draft board for NFL fantasy: filter the full player pool, mark picks as taken or yours, and see your roster fill automatically.
 
-First, run the development server:
+## Stack
+
+- [Next.js](https://nextjs.org/) (App Router) + TypeScript + Tailwind
+- [Supabase](https://supabase.com/) for the `players` table
+- Deploy on [Vercel](https://vercel.com/)
+
+## Setup
+
+### 1. Install
+
+```bash
+npm install
+cp .env.local.example .env.local
+```
+
+### 2. Supabase
+
+1. Create a Supabase project.
+2. Open **SQL Editor** and run [`supabase/migrations/001_players.sql`](supabase/migrations/001_players.sql).
+3. Insert your player list (Table Editor CSV import or SQL). Required columns:
+
+| Column | Type |
+|---|---|
+| `name` | text |
+| `team` | text |
+| `position` | `QB` `RB` `WR` `TE` `DEF` `K` |
+| `overall_rank` | integer |
+| `position_rank` | integer |
+| `bye_week` | integer (nullable) |
+| `strength_of_schedule` | integer (nullable) |
+| `selected` | boolean (default false) |
+| `my_team` | boolean (default false) |
+
+4. Copy **Project URL** and **anon public** key into `.env.local`:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=https://xxxx.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJ...
+```
+
+The migration enables RLS policies so the anon key can `SELECT` and `UPDATE` players (personal draft tool; no login).
+
+### 3. Run locally
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Usage
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Select** — mark a player taken by someone else (`selected = true`).
+- **My team** — add to your roster (`my_team = true` and `selected = true`). Slots auto-fill by `overall_rank` into QB / RB / WR / Flex / Defense / K / Bench.
+- **Clear** — put the player back in the available pool.
+- Filters: position, availability (All / Available / Selected / My team), and name search.
 
-## Learn More
+Roster slots (16):
 
-To learn more about Next.js, take a look at the following resources:
+`QB`, `RB`, `RB`, `WR`, `WR`, `WR`, `Flex`, `Flex`, `Defense`, `K`, plus 6 `Bench`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Flex accepts WR / RB / TE. If there is no legal open slot for a pick, **My team** is rejected with an error.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Deploy to Vercel
 
-## Deploy on Vercel
+1. Push this repo to GitHub (or connect the folder in the Vercel dashboard).
+2. Create a Vercel project from the repo.
+3. Add the same env vars: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`.
+4. Deploy.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Project layout
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+app/                 # pages + server actions
+components/          # DraftBoard, PlayerTable, Filters, RosterPanel
+lib/roster.ts        # slot defs + auto-assign
+lib/supabase/        # browser + server clients
+supabase/migrations/ # SQL for the players table
+```
