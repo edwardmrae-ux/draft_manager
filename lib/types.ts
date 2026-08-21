@@ -1,4 +1,4 @@
-export type Position = "QB" | "RB" | "WR" | "TE" | "DEF" | "K";
+export type Position = "QB" | "RB" | "WR" | "TE" | "DST" | "K";
 
 export type Player = {
   id: string;
@@ -24,7 +24,7 @@ export type SlotId =
   | "WR3"
   | "FLEX1"
   | "FLEX2"
-  | "DEF"
+  | "DST"
   | "K"
   | "BENCH1"
   | "BENCH2"

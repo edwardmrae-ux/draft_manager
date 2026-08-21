@@ -19,7 +19,7 @@ const POSITION_TILE_CLASS: Record<Position, string> = {
   RB: "bg-orange-500",
   TE: "bg-green-600",
   K: "bg-gray-500",
-  DEF: "bg-yellow-500",
+  DST: "bg-yellow-500",
 };
 
 function PositionTile({ position }: { position: Position }) {

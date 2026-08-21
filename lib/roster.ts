@@ -15,14 +15,14 @@ export const ROSTER_SLOT_DEFS: SlotDef[] = [
   { id: "WR3", label: "WR", allowed: ["WR"] },
   { id: "FLEX1", label: "Flex", allowed: ["WR", "RB", "TE"] },
   { id: "FLEX2", label: "Flex", allowed: ["WR", "RB", "TE"] },
-  { id: "DEF", label: "Defense", allowed: ["DEF"] },
+  { id: "DST", label: "Defense", allowed: ["DST"] },
   { id: "K", label: "K", allowed: ["K"] },
-  { id: "BENCH1", label: "Bench", allowed: ["QB", "RB", "WR", "TE", "DEF", "K"] },
-  { id: "BENCH2", label: "Bench", allowed: ["QB", "RB", "WR", "TE", "DEF", "K"] },
-  { id: "BENCH3", label: "Bench", allowed: ["QB", "RB", "WR", "TE", "DEF", "K"] },
-  { id: "BENCH4", label: "Bench", allowed: ["QB", "RB", "WR", "TE", "DEF", "K"] },
-  { id: "BENCH5", label: "Bench", allowed: ["QB", "RB", "WR", "TE", "DEF", "K"] },
-  { id: "BENCH6", label: "Bench", allowed: ["QB", "RB", "WR", "TE", "DEF", "K"] },
+  { id: "BENCH1", label: "Bench", allowed: ["QB", "RB", "WR", "TE", "DST", "K"] },
+  { id: "BENCH2", label: "Bench", allowed: ["QB", "RB", "WR", "TE", "DST", "K"] },
+  { id: "BENCH3", label: "Bench", allowed: ["QB", "RB", "WR", "TE", "DST", "K"] },
+  { id: "BENCH4", label: "Bench", allowed: ["QB", "RB", "WR", "TE", "DST", "K"] },
+  { id: "BENCH5", label: "Bench", allowed: ["QB", "RB", "WR", "TE", "DST", "K"] },
+  { id: "BENCH6", label: "Bench", allowed: ["QB", "RB", "WR", "TE", "DST", "K"] },
 ];
 
 /**

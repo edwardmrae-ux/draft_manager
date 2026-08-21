@@ -8,7 +8,7 @@ const POSITIONS: Array<Position | "ALL"> = [
   "RB",
   "WR",
   "TE",
-  "DEF",
+  "DST",
   "K",
 ];
 
