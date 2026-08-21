@@ -6,12 +6,31 @@ import {
   markMyTeam,
   markSelected,
 } from "@/app/actions";
-import type { Player } from "@/lib/types";
+import type { Player, Position } from "@/lib/types";
 
 type PlayerTableProps = {
   players: Player[];
   onError: (message: string | null) => void;
 };
+
+const POSITION_TILE_CLASS: Record<Position, string> = {
+  QB: "bg-red-600",
+  WR: "bg-blue-600",
+  RB: "bg-orange-500",
+  TE: "bg-green-600",
+  K: "bg-gray-500",
+  DEF: "bg-yellow-500",
+};
+
+function PositionTile({ position }: { position: Position }) {
+  return (
+    <span
+      className={`inline-flex rounded px-1.5 py-0.5 text-xs font-semibold text-white ${POSITION_TILE_CLASS[position]}`}
+    >
+      {position}
+    </span>
+  );
+}
 
 function StatusChip({ player }: { player: Player }) {
   if (player.my_team) {
@@ -99,8 +118,8 @@ export function PlayerTable({ players, onError }: PlayerTableProps) {
                     {player.name}
                   </td>
                   <td className="px-3 py-2 text-zinc-600">{player.team}</td>
-                  <td className="px-3 py-2 font-medium text-zinc-800">
-                    {player.position}
+                  <td className="px-3 py-2">
+                    <PositionTile position={player.position} />
                   </td>
                   <td className="px-3 py-2 tabular-nums text-zinc-600">
                     {player.position_rank}
