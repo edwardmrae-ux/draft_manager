@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { ByeWeekHeatmap } from "@/components/ByeWeekHeatmap";
 import { Filters } from "@/components/Filters";
 import { PlayerTable } from "@/components/PlayerTable";
 import { RosterPanel } from "@/components/RosterPanel";
@@ -18,10 +19,12 @@ export function DraftBoard({ players }: DraftBoardProps) {
   const [search, setSearch] = useState("");
   const [error, setError] = useState<string | null>(null);
 
-  const roster = useMemo(() => {
-    const mine = players.filter((p) => p.my_team);
-    return buildRoster(mine).slots;
-  }, [players]);
+  const myTeam = useMemo(
+    () => players.filter((p) => p.my_team),
+    [players],
+  );
+
+  const roster = useMemo(() => buildRoster(myTeam).slots, [myTeam]);
 
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
@@ -56,14 +59,21 @@ export function DraftBoard({ players }: DraftBoardProps) {
           </div>
         </div>
 
-        <Filters
-          position={position}
-          availability={availability}
-          search={search}
-          onPositionChange={setPosition}
-          onAvailabilityChange={setAvailability}
-          onSearchChange={setSearch}
-        />
+        <div className="flex flex-col gap-3 lg:flex-row lg:items-stretch">
+          <div className="min-w-0 flex-1">
+            <Filters
+              position={position}
+              availability={availability}
+              search={search}
+              onPositionChange={setPosition}
+              onAvailabilityChange={setAvailability}
+              onSearchChange={setSearch}
+            />
+          </div>
+          <div className="w-full shrink-0 lg:w-80">
+            <ByeWeekHeatmap players={myTeam} />
+          </div>
+        </div>
 
         {error ? (
           <div
