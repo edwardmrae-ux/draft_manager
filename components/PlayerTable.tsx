@@ -6,6 +6,7 @@ import {
   markMyTeam,
   markSelected,
 } from "@/app/actions";
+import { usePositionColors } from "@/components/PositionColorProvider";
 import type { Player, Position } from "@/lib/types";
 
 type PlayerTableProps = {
@@ -13,19 +14,17 @@ type PlayerTableProps = {
   onError: (message: string | null) => void;
 };
 
-const POSITION_TILE_CLASS: Record<Position, string> = {
-  QB: "bg-red-600",
-  WR: "bg-blue-600",
-  RB: "bg-orange-500",
-  TE: "bg-green-600",
-  K: "bg-gray-500",
-  DST: "bg-yellow-500",
-};
-
-function PositionTile({ position }: { position: Position }) {
+function PositionTile({
+  position,
+  color,
+}: {
+  position: Position;
+  color: string;
+}) {
   return (
     <span
-      className={`inline-flex rounded px-1.5 py-0.5 text-xs font-semibold text-white ${POSITION_TILE_CLASS[position]}`}
+      className="inline-flex rounded px-1.5 py-0.5 text-xs font-semibold text-white"
+      style={{ backgroundColor: color }}
     >
       {position}
     </span>
@@ -55,6 +54,7 @@ function StatusChip({ player }: { player: Player }) {
 }
 
 export function PlayerTable({ players, onError }: PlayerTableProps) {
+  const { colors } = usePositionColors();
   const [pending, startTransition] = useTransition();
 
   function run(
@@ -119,7 +119,10 @@ export function PlayerTable({ players, onError }: PlayerTableProps) {
                   </td>
                   <td className="px-3 py-2 text-zinc-600">{player.team}</td>
                   <td className="px-3 py-2">
-                    <PositionTile position={player.position} />
+                    <PositionTile
+                      position={player.position}
+                      color={colors[player.position]}
+                    />
                   </td>
                   <td className="px-3 py-2 tabular-nums text-zinc-600">
                     {player.position_rank}
