@@ -22,8 +22,8 @@ export type SlotId =
   | "WR1"
   | "WR2"
   | "WR3"
+  | "TE"
   | "FLEX1"
-  | "FLEX2"
   | "DST"
   | "K"
   | "BENCH1"
@@ -31,7 +31,8 @@ export type SlotId =
   | "BENCH3"
   | "BENCH4"
   | "BENCH5"
-  | "BENCH6";
+  | "BENCH6"
+  | "BENCH7";
 
 export type RosterSlot = {
   id: SlotId;

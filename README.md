@@ -55,13 +55,13 @@ Open [http://localhost:3000](http://localhost:3000).
 ## Usage
 
 - **Select** — mark a player taken by someone else (`selected = true`).
-- **My team** — add to your roster (`my_team = true` and `selected = true`). Slots auto-fill by `overall_rank` into QB / RB / WR / Flex / Defense / K / Bench.
+- **My team** — add to your roster (`my_team = true` and `selected = true`). Slots auto-fill by `overall_rank` into QB / RB / WR / TE / Flex / Defense / K / Bench.
 - **Clear** — put the player back in the available pool.
 - Filters: position, availability (All / Available / Selected / My team), and name search.
 
-Roster slots (16):
+Roster slots (17):
 
-`QB`, `RB`, `RB`, `WR`, `WR`, `WR`, `Flex`, `Flex`, `Defense`, `K`, plus 6 `Bench`.
+`QB`, `RB`, `RB`, `WR`, `WR`, `WR`, `TE`, `Flex`, `Defense`, `K`, plus 7 `Bench`.
 
 Flex accepts WR / RB / TE. If there is no legal open slot for a pick, **My team** is rejected with an error.
 

@@ -13,8 +13,8 @@ export const ROSTER_SLOT_DEFS: SlotDef[] = [
   { id: "WR1", label: "WR", allowed: ["WR"] },
   { id: "WR2", label: "WR", allowed: ["WR"] },
   { id: "WR3", label: "WR", allowed: ["WR"] },
+  { id: "TE", label: "TE", allowed: ["TE"] },
   { id: "FLEX1", label: "Flex", allowed: ["WR", "RB", "TE"] },
-  { id: "FLEX2", label: "Flex", allowed: ["WR", "RB", "TE"] },
   { id: "DST", label: "Defense", allowed: ["DST"] },
   { id: "K", label: "K", allowed: ["K"] },
   { id: "BENCH1", label: "Bench", allowed: ["QB", "RB", "WR", "TE", "DST", "K"] },
@@ -23,6 +23,7 @@ export const ROSTER_SLOT_DEFS: SlotDef[] = [
   { id: "BENCH4", label: "Bench", allowed: ["QB", "RB", "WR", "TE", "DST", "K"] },
   { id: "BENCH5", label: "Bench", allowed: ["QB", "RB", "WR", "TE", "DST", "K"] },
   { id: "BENCH6", label: "Bench", allowed: ["QB", "RB", "WR", "TE", "DST", "K"] },
+  { id: "BENCH7", label: "Bench", allowed: ["QB", "RB", "WR", "TE", "DST", "K"] },
 ];
 
 /**
